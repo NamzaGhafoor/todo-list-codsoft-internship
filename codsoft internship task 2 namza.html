@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    /> -->
+    <title>To-Do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/jpg" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Montserrat:wght@500&display=swap"
+        rel="stylesheet">
+
+    <!-- jquery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+    <!-- FontAwesome CDN-->
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css' rel='stylesheet'
+        integrity='sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU' crossorigin='anonymous'>
+
+
+</head>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@700&display=swap');
+/* removed the translate since it results in bad user expericence */
+
+/* CSS Varible for colors [15-10-2022] */
+:root {
+    --black: rgb(0, 0, 0);
+    --black-shade-1: rgb(38, 36, 36);
+    --black-shade-2: rgb(42, 34, 34);
+    --black-shade-3: rgb(27, 32, 30);
+    --black-shade-4: rgb(50, 49, 48);
+    --black-shade-5: rgb(5, 16, 21);
+    --black-opacity: rgba(0, 0, 0, 0.4);
+    --black-opacity-1: rgba(17, 17, 17, 0.742);
+    --green: rgb(51, 243, 12);
+    --green-shade-1: rgb(37, 180, 37);
+    --green-shade-2: rgb(76, 165, 76);
+    --backgroundGreen: rgb(139, 255, 116);
+    --white: rgb(255, 255, 255);
+    --white-shade-1: #fefefe;
+    --white-shade-2: #f7fffe;
+    --white-shade-3: rgb(247, 247, 249);
+    --white-shade-4: rgb(238, 247, 248);
+    --white-shade-5: rgb(247, 236, 218);
+    --gray-shade-1: #888888;
+    --gray-shade-2: #aaaaaa;
+    --gray-shade-3: rgb(83, 82, 82);
+    --gray-shade-4: #4d4c4c;
+    --gray-shade-5: rgb(189, 175, 148);
+    --gray-shade-6: rgb(172, 150, 107);
+    --gray-shade-7: rgb(125, 118, 118);
+    --gray-shade-8: rgb(162, 156, 163);
+    --blue: rgb(21, 17, 255);
+    --blue-shade-1: #1511ff;
+    --blue-shade-2: rgb(0, 0, 255);
+    --sky-blue: #0093E9;
+    --blue-shade-1: #55acee;
+    --blue-shade-1: #5470B0;
+    --dark-graphite-black: #111111;
+    --green-shade-1: #80D0C7;
+    --green-shade-2: rgb(126, 231, 243);
+    --gren-shade-3: rgba(104, 225, 189, 0.998);
+    --red-shade-1: rgb(207, 2, 2);
+    --red-shade-2: rgb(225, 111, 111);
+    --red-shade-3: rgb(255, 44, 44);
+    --red-shade-4: rgb(224, 19, 19);
+    --pink-shade-1: #D75281;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+@keyframes expand {
+    from {
+        transform: scale(0);
+        opacity: 0;
+        background: var(--blue-shade-1);
+    }
+}
+
+@media screen and (min-width: 40.5em) {
+    .product-img {
+        width: 50%;
+        float: left;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+
+.column {
+    width: 100%;
+}
+
+.header h1 {
+    font-size: 4rem;
+    font-weight: 1000;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    padding-left: 2.5em;
+    }
+    @media only screen and (max-width: 768px) {
+    .header h1 {
+        padding-left: 0em;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .header h1 {
+        padding-left: 0em;
+        font-size: 2em;
+    }
+
+}
+@media only screen and (max-width: 354px) {
+    .header h1 {
+        padding-left: 0em;
+        font-size: 1.5em;
+    }
+    }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    flex-direction: column;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+/* class for dark mode*/
+.dark-mode {
+    background: #282424 !important;
+    color: white !important;
+}
+.body-background{
+    background: #0f0e0e;
+}
+body {
+    background-image: url("https://www.slideteam.net/wp/wp-content/uploads/2016/05/Radial-1-690x518.png");
+    background-size: 100% 100%;
+}
+header {
+    letter-spacing: -1px;
+    background-color: var(--sky-blue);
+    background-image: radial-gradient(circle at top center, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 6%, transparent 6%, transparent 54%, transparent 54%, transparent 93%, rgba(48, 184, 210, 0.15) 93%, rgba(48, 184, 210, 0.15) 100%), radial-gradient(circle at top right, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 2%, transparent 2%, transparent 19%, transparent 19%, transparent 36%, rgba(48, 184, 210, 0.15) 36%, rgba(48, 184, 210, 0.15) 100%), radial-gradient(circle at top right, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 1%, transparent 1%, transparent 2%, transparent 2%, transparent 11%, rgba(48, 184, 210, 0.15) 11%, rgba(48, 184, 210, 0.15) 100%), radial-gradient(circle at center center, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 13%, transparent 13%, transparent 59%, transparent 59%, transparent 67%, rgba(48, 184, 210, 0.15) 67%, rgba(48, 184, 210, 0.15) 100%), linear-gradient(90deg, hsl(38, 64%, 92%), hsl(38, 64%, 92%));
+    background-size: 111px 111px;
+    /* opacity: 70%; */
+    color: var(--dark-graphite-black);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0%;
+    margin-bottom: 5vh;
+    font-family: 'Montserrat', sans-serif ;
+}
+
+header h1 {
+    font-weight: 800;
+}
+.col-auto{
+    position: relative;
+    margin-top: -10px
+}
+
+
+header,
+form {
+    min-height: 15vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-size: 100%;
+    /* margin: 0.5rem; */
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+form input,
+form button,
+.delete-all {
+    padding: 10px 20px;
+    margin: 1rem;
+    font-size: 1rem;
+    outline: none;
+    background-color: var(--white);
+    border-radius: 5px;
+    border: none;
+}
+
+.myBtn {
+    text-align: center;
+    font-family: 'Baloo Bhai 2';
+    font-weight: bold;
+    font-size: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none;
+    border-radius: 5px;
+    background-color: var(--green-shade-1);
+    cursor: pointer;
+    padding: 1rem;
+    justify-content: center;
+    margin: 2rem auto;
+    display: flex;
+
+    width: 11rem;
+
+    @media (min-width: 359px) and (max-width: 741px) {
+        margin-left: 11px;
+        width: 12rem;
+
+    }
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        width: 12rem;
+
+    }
+
+    width: 20rem;
+
+    @media (min-width: 359px) and (max-width: 741px) {
+        margin-left: 11px;
+        width: 12rem;
+
+    }
+
+
+}
+
+.myBtn:hover {
+    background-color: coral;
+}
+
+.modal-new {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: var(--black);
+    /* Fallback color */
+    background-color: var(--black-opacity);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: var(--white-shade-1);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--gray-shade);
+    width: 80%;
+    position: relative;
+    top: 200px;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: var(--gray-shade-2);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--black);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.buttons-wrapper {
+    margin: 2rem auto;
+    font-family: 'Baloo Bhai 2', cursive;
+}
+
+.button-div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.todo-button {
+    background: var(--green-shade-1);
+
+    @media (min-width: 359px) and (max-width: 741px) {
+        height: 50px
+    }
+}
+
+.todo-button:hover {
+    background-color: var(--blue-shade-1);
+}
+
+form button,
+.delete-all {
+    cursor: pointer;
+}
+
+form button:hover {
+    background: var(--blue-shade-1);
+    color: var(--white);
+}
+
+.delete-all {
+    background-color: var(--pink-shade-1);
+    color: var(--white);
+    width: 200px;
+    margin: auto auto 1.5rem;
+}
+
+.delete-all:hover {
+    background-color: var(--red-shade-1);
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Baloo Bhai 2', cursive;
+}
+
+.todo-list {
+    min-width: 40%;
+    list-style: none;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.todo {
+    margin: 0.5rem;
+    background: var(--white);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s ease;
+    outline: none;
+    border-radius: 5px;
+    animation: expand .5s ease-in-out;
+}
+
+.main_heading h1 {
+    font-size: 8rem;
+}
+
+.filter-todo {
+    padding: 1rem;
+
+    @media only screen and (min-width: 819px) and (max-device-width: 1024px) {
+        width: 15px
+    }
+}
+
+.filter-todo:hover {
+    background-color: lightcoral;
+}
+
+.todo li {
+    flex: 1;
+}
+
+.trash-btn,
+.complete-btn {
+    background: var(--red-shade-1);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.complete-btn {
+    background-color: var(--blue-shade-1);
+    color: var(--white);
+}
+
+.complete-btn:hover {
+    background: var(--green-shade-1);
+    color: var(--white);
+}
+
+.edit-btn {
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.edit-btn:hover {
+    background: var(--black-shade-1);
+    color: var(--white);
+}
+
+.trash-btn:hover {
+    background: var(--red-shade-2);
+}
+
+.todo-item {
+    padding: 0rem 0.5rem;
+    line-break: anywhere;
+}
+
+.fa-trash,
+.fa-check {
+    pointer-events: none;
+}
+
+.fall {
+    transform: translateY(10rem) rotateZ(20deg);
+    opacity: 0;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.todo-list form input,
+.todo-list form button {
+    background-color: var(--green-shade-1);
+    color: var(--dark-graphite-black);
+}
+
+.todo-list form input::placeholder {
+    color: var(--gray-shade-3);
+}
+
+
+/*CUSTOM SELECTOR */
+
+select {
+    text-align: center;
+    font-weight: bold;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    font-size: 20px;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none;
+    border-radius: 5px;
+    background-color: var(--green-shade-1);
+    cursor: pointer;
+}
+
+header h1{
+    font-family: 'Montserrat' !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    margin-left: 50px;
+    color:black;
+}
+
+.myModal h1{
+    font-family: 'Montserrat' !important;
+    text-decoration: none;
+    font-style: normal  !important;
+
+}
+
+/* Custom Select */
+
+.select {
+    display: inline-block;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    overflow: hidden;
+    background-color: var(--gray-shade-1);
+    border-radius: 5px;
+    font-family: 'Baloo Bhai 2', cursive !important;
+}
+
+.abc {
+    display: flex;
+    flex-direction: row;
+}
+
+.todoform {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer {
+    z-index:-1000;
+    background-image: radial-gradient(circle at top center, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 6%, transparent 6%, transparent 54%, transparent 54%, transparent 93%, rgba(48, 184, 210, 0.15) 93%, rgba(48, 184, 210, 0.15) 100%), radial-gradient(circle at top right, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 2%, transparent 2%, transparent 19%, transparent 19%, transparent 36%, rgba(48, 184, 210, 0.15) 36%, rgba(48, 184, 210, 0.15) 100%), radial-gradient(circle at top right, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 1%, transparent 1%, transparent 2%, transparent 2%, transparent 11%, rgba(48, 184, 210, 0.15) 11%, rgba(48, 184, 210, 0.15) 100%), radial-gradient(circle at center center, rgba(17, 201, 137, 0.15) 0%, rgba(17, 201, 137, 0.15) 13%, transparent 13%, transparent 59%, transparent 59%, transparent 67%, rgba(48, 184, 210, 0.15) 67%, rgba(48, 184, 210, 0.15) 100%), linear-gradient(90deg, hsl(38, 64%, 92%), hsl(38, 64%, 92%));
+    background-size: 100% 111px;
+    height: 12vh;
+    /* background-repeat: no-repeat; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-top: auto;
+    width: 100%;
+    background-color: var(--blue-shade-1);
+    text-align: center;
+    box-shadow: 10px -4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 440px) {
+    .abc {
+        flex-direction: column;
+    }
+
+    .todoform {
+        flex-direction: column;
+    }
+}
+
+
+/* Arrow */
+
+
+/* Transition  */
+
+.select:hover::after {
+    background-color: var(--white-shade-2);
+    color: var(--blue-shade-1);
+}
+
+
+/* Footer */
+
+.footer h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    color: var(--dark-graphite-black);
+    font-size: 25px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.social-icon {
+    width: 32px;
+    height: auto;
+    float: left;
+    margin: 0.5rem;
+    /* border-radius: 50%; */
+    transition: all 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+.footer-desc {
+    color: var(--black-opacity-1);
+    font-size: 0.8rem;
+    margin-top: .5rem;
+    font-weight: 600;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    /* Stay in place */
+    z-index: 9;
+    /* Sit on top */
+    color: var(--white);
+    opacity: 1;
+    top: 1;
+    height: fit-content;
+}
+
+.true {
+    display: block;
+}
+
+.content {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+    width: fit-content;
+    margin: auto;
+}
+
+.green {
+    background-color: var(--green-shade-2);
+}
+
+.red {
+    background-color: var(--red-shade-3);
+    border-radius: 0.25em;
+}
+
+.blue {
+    background-color: var(--blue-shade-2);
+}
+
+.modal-btn {
+    background: transparent;
+    color: var(--white);
+    box-shadow: none;
+    border: none;
+    padding: 0.02em 0.68em;
+    margin: 0 0 0.03em 0.5em;
+    border-radius: 0.25em;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-btn:hover {
+    opacity: .7;
+}
+
+.no-to-do-item {
+    text-align: center;
+    padding-top: 50px;
+    color: whitesmoke;
+    font-weight: lighter;
+
+}
+
+@keyframes slideIn {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+/* Clock style modification  */
+
+body {
+    background-color: var(--white-shade-3);
+    min-height: 100vh;
+    width: 100%;
+    /* keeping width: 100 viewport width can cause horizontal scrollbar which is an issue, fixed using percentage */
+    display: grid;
+}
+
+.Clock {
+    display: flex;
+    border: 2px solid var(--black);
+    background-color: var(--green-shade-2);
+    height: 150px;
+    width: 300px;
+    margin: auto;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: inset 10px 10px 10px var(--black-shade-2),
+        inset -10px -10px 10px var(--black-shade-2);
+    transition: transform .4s linear;
+    box-shadow: 5px 10px;
+}
+
+.Clock:hover {
+    transform: rotate(360deg);
+    background: var(--white-shade-4);
+    cursor: pointer;
+}
+
+#time {
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: var(--gren-shade-3);
+    height: 80px;
+    box-shadow: inset -2px -2px 15px var(--gray-shade-5),
+        inset 2px 2px 15px var(--gray-shade-6);
+    width: 250px;
+    padding: 2vh;
+    font-size: 30px;
+    text-shadow: 2px -2px 2px var(--gray-shade-7);
+    font-weight: bolder;
+    color: var(--black-shade-3);
+    margin: auto;
+    color: transparent;
+    -webkit-text-fill-color: var(--black-shade-4);
+    -webkit-text-stroke-color: var(--black-shade-5);
+    transition: transform .4s linear;
+}
+
+.Clock:hover #time {
+    background-color: var(--white-shade-5);
+    -webkit-text-fill-color: var(--gray-shade-8);
+    text-shadow: 2px -2px 2px var(--black);
+    cursor: pointer;
+    font-weight: bolder;
+    transform: rotate(-720deg);
+}
+
+.week {
+    display: flex;
+    position: absolute;
+    color: var(--black-shade-3);
+    font-size: 20px;
+    text-shadow: 1px 1px 10px var(--red-shade-4);
+    margin-top: 80px;
+}
+
+.Clock:hover .week {
+    text-shadow: 1px 1px 10px var(--black);
+    font-size: 20px;
+}
+
+/* ################################### */
+
+.confirmation_box,
+.congratulations_box {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 18%);
+    animation: slideIn 0.2s;
+}
+
+.confirmation_box_inner,
+.congratulations_box_inner {
+    width: 550px;
+    height: 250px;
+    background: #f7fffe;
+    bottom: 280px;
+    border-radius: 20px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* congrats_text is the paragraph element of congratulations_box  */
+#congrats_text {
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+
+.optbox_header {
+    background-color: #0093E9;
+    background: linear-gradient(90deg, rgba(111, 108, 221, 1) 0%, rgba(57, 190, 193, 1) 100%);
+    height: 50px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#text-modal {
+    color: red;
+    z-index: 999;
+}
+
+.confirmation_box p {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 3;
+    text-align: center;
+}
+
+.option_box {
+    display: flex;
+
+    gap: 50px;
+    justify-content: center;
+}
+
+.proceed,
+.donot_proceed {
+    cursor: pointer;
+}
+
+.proceed {
+    color: white;
+}
+
+.donot_proceed {
+    color: white;
+}
+
+.proceed:hover,
+.donot_proceed:hover {
+    text-decoration: underline;
+}
+
+.modal-button {
+    height: 50px;
+    width: 120px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 5px;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(111, 108, 221, 1) 0%, rgba(57, 190, 193, 1) 100%);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.2s;
+}
+
+.modal-button:hover {
+    transform: scale(102%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.optbox_header i {
+    font-size: 2rem;
+    color: #FFF;
+    position: relative;
+    border: none;
+    left: 510px;
+    top: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.optbox_header i:hover {
+    color: black;
+}
+
+@media only screen and (max-width: 440px) {
+    .confirmation_box {
+        /* border: 1px solid black; */
+        width: 300px;
+        height: 300px;
+        background: #f7fffe;
+        position: relative;
+        bottom: 280px;
+        border-radius: 20px;
+    }
+
+    .optbox_header {
+        background: linear-gradient(90deg, rgba(111, 108, 221, 1) 0%, rgba(57, 190, 193, 1) 44%, rgba(155, 110, 198, 1) 100%);
+        height: 40px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    .confirmation_box p {
+        position: relative;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .donot_proceed {
+        background: linear-gradient(90deg, rgba(111, 108, 221, 1) 0%, rgba(57, 190, 193, 1) 44%, rgba(155, 110, 198, 1) 100%);
+        border-radius: 10px;
+        position: relative;
+        left: 20px;
+        text-align: center;
+        font-size: 2.2rem;
+    }
+
+    .option_box {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        width: 250px;
+        position: relative;
+        left: 0px;
+        top: 50px;
+    }
+
+    /* .proceed:hover {
+        box-shadow: 10px 10px 10px rgb(132, 131, 131);
+        cursor: pointer;
+        height: 65px;
+        width: 95px;
+        font-size: 2.8rem;
+    }
+
+    .donot_proceed:hover {
+        box-shadow: 10px 10px 10px rgb(132, 131, 131);
+        cursor: pointer;
+        height: 65px;
+        width: 95px;
+        font-size: 2.8rem;
+    } */
+
+    .optbox_header i {
+        font-size: 2rem;
+        color: #FFF;
+        position: relative;
+        /* background-color:red; */
+        width: 28px;
+        height: 26px;
+        border: none;
+        left: 255px;
+        top: 5px;
+    }
+
+    .optbox_header i:hover {
+        cursor: pointer;
+        color: black;
+    }
+}
+
+#txt-color,
+#txt-color1 {
+    color: white;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 731px) {
+    .footer {
+        /* background-image: linear-gradient(135deg, #0093E9 0%, #80D0C7 100%); */
+        height: 22vh;
+        display: grid;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: -28%;
+        width: 100%;
+        background-color: var(--blue-shade-1);
+        text-align: center;
+    }
+}
+
+/* Style for fa-heart */
+.fa-heart-custom {
+    color: #e74c3c;
+    animation: 1.5s ease 0s infinite hear-beat;
+}
+
+@keyframes hear-beat {
+
+    0%,
+    50%,
+    100% {
+        transform: scale(1, 1);
+    }
+
+    30%,
+    80% {
+        transform: scale(0.90, 0.93);
+    }
+
+}
+
+@keyframes vibrate-1 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+.myBtn:hover {
+    animation: vibrate-1 0.3s linear infinite both;
+}
+
+.select:hover {
+    animation: vibrate-1 0.3s linear infinite both;
+}
+
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 10;
+    height: 2rem;
+    width: 4rem;
+    cursor: pointer;
+
+}
+
+.label {
+    width: 54px;
+    height: 29px;
+    background-color: #111;
+    display: flex;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    transform: scale(1);
+}
+
+/* .label-center {
+    width: 54px;
+    height: 29px;
+    background-color: #111;
+    display: flex;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    transform: scale(1);
+} */
+
+.ball {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    position: absolute;
+    top: 2px;
+    left: 2.5px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+.checkbox:checked+.label .ball {
+    transform: translateX(24px);
+}
+
+.fa-moon {
+    color: pink;
+}
+
+.fa-sun {
+    color: yellow;
+}
+
+/* scrollTop css codes */
+#scrollTop {
+    display: none;
+    position: fixed;
+    bottom: 2%;
+    right: 5%;
+    width: 40px;
+    height: 50px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background: inherit;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+#scrollTop:hover {
+    background-color: #555;
+}
+
+.navbar {
+    width: 100%;
+    /* background-color: #555; */
+    overflow: auto;
+}
+
+.navbar a {
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.footer-desc {
+    margin-top: unset;
+    margin-bottom: unset;
+}
+
+.footer-creator-label h3 {
+    margin-top: unset;
+}
+
+</style>
+<body>
+    <header>
+        <div class="navbar">
+            
+        </div>
+
+    </header>
+    
+
+    <!-- Clock Modification -->
+    <div class="Clock" hidden>
+        <div id="time"></div>
+        <div class="week">
+            <div id="day"></div>
+            <div id="date"></div>
+        </div>
+    </div>
+
+    <section class="pt-3 pb-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 mx-auto py-3">
+              <div class="row">
+                <div class="col-md-4 position-relative">
+                  <div class="p-3 text-center">
+                    <h1 class="text-gradient text-white"><span id="state1">0</span></h1>
+                    <h5 class="mt-3 text-white ">Total Tasks</h5>
+                    <p class="text-sm font-weight-normal text-white ">Number of tasks you have created</p>
+                  </div>
+                  <hr class="vertical dark">
+                </div>
+                <div class="col-md-4 position-relative">
+                  <div class="p-3 text-center">
+                    <h1 class="text-gradient text-white"> <span id="state2">0</span></h1>
+                    <h5 class="mt-3 text-white">Remaining To Do</h5>
+                    <p class="text-sm font-weight-normal text-white">Tasks remaining to complete.</p>
+                  </div>
+                  <hr class="vertical dark">
+                </div>
+                <div class="col-md-4">
+                  <div class="p-3 text-center">
+                    <h1 class="text-gradient text-white" id="state3">0</h1>
+                    <h5 class="mt-3 text-white">Completed Tasks</h5>
+                    <p class="text-sm font-weight-normal text-white">Total Number of tasks completed</p>
+                  </div>
+                  <hr class="vertical dark">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <div class="buttons-wrapper mt-0">
+        <div class="button-div">
+            <button type="button" id="myBtn" class="myBtn">Add a new task</button>
+        </div>
+        <div class="select">
+            <select name="todos" class="filter-todo" style="color: black">
+                <option value="all" style="color: black">All</option>
+                <option value="completed" style="color: black">Completed</option>
+                <option value="incomplete" style="color: black">Incomplete</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal-new">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form class="todoform">
+                <div class="input-group mb-3">
+                    <input type="text" placeholder="Add a new Task .." class="todo-input form-control" id="textInput"
+                        required />
+                        <select id="categorySelect" class="form-select" >
+                            <option value="work">Work</option>
+                            <option value="personal">Personal</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="shopping">Household</option>
+                            
+                        </select>
+                        
+                        
+                        
+                    <div class="abc">
+                        <button id="todo-button" class="todo-button" type="submit">
+                            <i class="fas fa-plus-square"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div style="color: whitesmoke; font-size: xx-small" class="no-to-do-item">
+        <h1>THE LIST IS EMPTY !</h1>
+    </div>
+    <div class="todo-container">
+        <ul class="todo-list"></ul>
+    </div>
+    <button class="delete-all" onclick="show_alert()">Delete All Tasks</button>
+
+    <!-- <div cla ss="confirmation_box"></div> -->
+
+
+    <div class="confirmation_box hide " id="confirmation_box">
+        <div class="confirmation_box_inner">
+            <div class="optbox_header">
+                <i class="fas fa-times" onclick="goback()"></i>
+            </div>
+            <p id="text-modal">Are you sure you want to delete all tasks?</p>
+            <div class="option_box">
+                <button class="proceed btn btn-success mt-5 col-3" id="txt-color" onclick="deleteAll();">Yes</button>
+                <button class="donot_proceed btn btn-danger mt-5 col-3" id="txt-color1" onclick="goback()">No</button>
+            </div>
+            <div class="confirmation_box hide" id="confirmation_box">
+                <div class="confirmation_box_inner">
+                    <div class="optbox_header">
+                        <i class="fas fa-times" onclick="goback()"></i>
+                    </div>
+                    <p id="text-modal">Are you sure you want to delete all tasks?</p>
+                    <div class="option_box">
+                        <button class="proceed btn btn-success mt-5 col-3" id="txt-color" onclick="deleteAll();">
+                            Yes
+                        </button>
+                        <button class="donot_proceed btn btn-danger mt-5 col-3" id="txt-color1" onclick="goback()">
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer">
+            
+           
+           
+        </div>
+    </footer>
+
+
+    <button onclick="scrollWindow()" id="scrollTop" title="Go to top">&uArr;</button>
+    <script>
+        //Select DOM
+const todoInput = document.querySelector(".todo-input");
+const todoButton = document.querySelector(".todo-button");
+const todoList = document.querySelector(".todo-list");
+const filterOption = document.querySelector(".filter-todo");
+const deleteAllButton = document.querySelector(".delete-all");
+const noToDoItemText = document.querySelector(".no-to-do-item");
+
+//Event Listeners
+document.addEventListener("DOMContentLoaded", getTodos);
+todoButton.addEventListener("click", addTodo);
+todoList.addEventListener("click", deleteTodo);
+filterOption.addEventListener("change", filterTodo);
+
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var textField = document.getElementById("textInput");
+var span = document.getElementsByClassName("close")[0];
+var addBtn = document.getElementById("todo-button");
+//Functions
+function checkForEmptyList() {
+  if (localStorage.getItem("todos") === null) {
+    deleteAllButton.classList.add("hide");
+    noToDoItemText.classList.remove("hide");
+  } else {
+    if (getItemFromLocalStorage().length == 0) {
+      deleteAllButton.classList.add("hide");
+      noToDoItemText.classList.remove("hide");
+    } else {
+      deleteAllButton.classList.remove("hide");
+      noToDoItemText.classList.add("hide");
+    }
+  }
+}
+setInterval(checkForEmptyList, 100);
+
+function htmlEncode(str) {
+  return String(str);
+}
+
+function getItemFromLocalStorage() {
+  const todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+  return todos;
+}
+
+function addTodo(e) {
+  //Prevent natural behavior
+  e.preventDefault();
+
+  const d = new Date();
+  const createTime = d.getTime();
+  const infoText = `The todo item was created at ${createTime}, ${day}`;
+  const currentValue = htmlEncode(todoInput.value)?.trim() || "";
+  if (!currentValue) {
+    //alert("Fill the box");
+    openmodal("red", "Please enter a Task!");
+    return;
+  }
+  //alert("Only Number is Type");
+  if (!/\D/.test(currentValue)==true) {
+    openmodal("red", "Do not enter only Numbers, Please enter a valid Task!");
+    return;
+  }
+
+  // alert("Duplicate task")
+  if (isDuplicate(currentValue)) {
+    openmodal("red", "This Task is already added!");
+    return;
+  }
+
+  //Create todo div
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo");
+  //Create list
+  const newTodo = document.createElement("li");
+  newTodo.innerText = currentValue;
+
+  let newTodoItem = {
+    id: Math.round(Math.random() * 100), //id for selection
+    task: currentValue,
+    status: "incomplete",
+    infoText: infoText,
+    createTime: createTime,
+  };
+  todoDiv.setAttribute("key", newTodoItem.id);
+
+  //Save to local - do this last
+  //Save to local
+  saveLocalTodos(newTodoItem);
+
+  //
+  newTodo.classList.add("todo-item");
+  newTodo.classList.add("todo");
+  todoDiv.appendChild(newTodo);
+  todoInput.value = "";
+  const edit = document.createElement("div");
+  edit.innerHTML =
+    ` <form class="editform">
+    <input type="text" placeholder=` +
+    `"${newTodoItem.task}"` +
+    `id="` +
+    `edit-${newTodoItem.id}` +
+    `" required />
+    <div class="editDiv" style="margin:auto;">
+    <button id="editBtn-` +
+    `${newTodoItem.id}` +
+    `" type="submit">
+      <i class="fas fa-plus-square"></i>
+    </button>
+  </div>
+  </form>`;
+  edit.classList.add("hide");
+  todoDiv.appendChild(edit);
+  //Create Completed Button
+  const completedButton = document.createElement("button");
+  completedButton.innerHTML = `<i class="fas fa-check"></i>`;
+  completedButton.classList.add("complete-btn");
+  todoDiv.appendChild(completedButton);
+  //Create edit button
+  const editButton = document.createElement("button");
+  editButton.innerHTML = `<i class="fas fa-pen"></i>`;
+  editButton.classList.add("edit-btn");
+  editButton.addEventListener("click", () => editTodo(newTodoItem, todoDiv));
+  todoDiv.appendChild(editButton);
+  //Create trash button
+  const trashButton = document.createElement("button");
+  trashButton.innerHTML = `<i class="fas fa-trash"></i>`;
+  trashButton.classList.add("trash-btn");
+  todoDiv.appendChild(trashButton);
+  //Create info button
+  const infoButton = document.createElement("span");
+  infoButton.innerHTML = `<i class="fas fa-info-circle"></i>`;
+  infoButton.classList.add("edit-btn");
+  todoDiv.appendChild(infoButton);
+
+  //attach final Todo
+  todoList.appendChild(todoDiv);
+
+  if (localStorage.getItem("display-theme") == "dark") {
+    document.querySelectorAll('.todo');
+    todoDiv.classList.toggle('dark-mode');
+    newTodo.classList.toggle('dark-mode');
+  }
+  setAggregatedToDos();
+}
+
+function deleteTodo(e) {
+  const item = e.target;
+
+  if (item.classList[0] === "trash-btn") {
+    // e.target.parentElement.remove();
+    const todo = item.parentElement;
+    todo.classList.add("fall");
+    //at the end
+    removeLocalTodos(todo);
+    todo.addEventListener("transitionend", (e) => {
+      todo.remove();
+    });
+  }
+  if (item.classList[0] === "complete-btn") {
+    const todo = item.parentElement;
+    todo.classList.toggle("completed");
+    const status = "completed";
+    const id = todo.getAttribute("key");
+    saveStatus(id, status);
+    checkIfAllTaksCompleted();
+  }
+
+  setAggregatedToDos();
+}
+
+//save the status of the task -> and persist by saving it to the localstorage
+function saveStatus(id, status) {
+  const todos = getItemFromLocalStorage();
+  const intId = Number(id);
+  const newTodo = todos.find((todo) => todo.id === intId);
+  const newStatus =
+    newTodo.status === "incomplete" ? "completed" : "incomplete";
+  const todoIndex = todos.indexOf(newTodo);
+  todos.splice(todoIndex, 1);
+  newTodo.status = newStatus;
+  todos.splice(todoIndex, 0, newTodo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function filterTodo(e) {
+  const todos = todoList.childNodes;
+  todos.forEach((todo) => {
+    // console.log(e.target.value);
+
+    if (
+      e.target.value === "completed" &&
+      todo.classList.contains("completed")
+    ) {
+      todo.style.display = "flex";
+    } else if (
+      e.target.value === "completed" &&
+      !todo.classList.contains("completed")
+    ) {
+      todo.style.display = "none";
+    } else if (
+      e.target.value === "incomplete" &&
+      !todo.classList.contains("completed")
+    ) {
+      todo.style.display = "flex";
+    } else if (
+      e.target.value === "incomplete" &&
+      !todo.classList.contains("incomplete")
+    ) {
+      todo.style.display = "none";
+    } else {
+      todo.style.display = "flex";
+    }
+  });
+}
+
+//save the task to the local storage
+function saveLocalTodos(todo) {
+  let todos = getItemFromLocalStorage();
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+//function to delete a task
+function removeLocalTodos(id) {
+  const intId = Number(id);
+  let todos = getItemFromLocalStorage();
+  const newTodo = todos.filter((todo) => todo.id !== intId);
+
+  localStorage.setItem("todos", JSON.stringify(newTodo));
+}
+
+//function to toggle display
+function editTodo(todo, todoDiv) {
+  for (let i = 0; i < todoDiv.children.length; i++) {
+    if (i == 1) {
+      todoDiv.children[i].classList.remove("hide");
+    } else {
+      todoDiv.children[i].classList.add("hide");
+    }
+  }
+  const editBtn = document.getElementById(`editBtn-` + `${todo.id}`);
+  editBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    editTask(todo, todoDiv);
+    location.reload();
+  });
+}
+
+function editTask(todo, todoDiv) {
+  let todos = getItemFromLocalStorage();
+  const editInputElem = document.getElementById(`edit-` + `${todo.id}`);
+  const editValue = editInputElem.value?.trim() || "";
+  if (!editValue) {
+    //alert("Fill the box");
+    openmodal("red", "Fill the box");
+    return;
+  }
+  if (isDuplicate(editValue)) {
+    openmodal("red", "This Task is already added!");
+    return;
+  }
+  const updatedTodos = todos.map((t) => {
+    if (t.id === todo.id) {
+      return { ...t, task: editValue };
+    }
+    return t;
+  });
+  localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  todoDiv.children[0].innerText = editValue;
+}
+
+function isDuplicate(task) {
+  let todos = getItemFromLocalStorage();
+  const index = todos.findIndex((t) => t.task === task);
+  return index > -1;
+}
+
+// function getTodos() {
+//   let todos = getItemFromLocalStorage();
+//   todos.forEach(function (todo) {
+
+//     //Create todo div
+//     const todoDiv = document.createElement("div");
+//     todoDiv.classList.add("todo");
+//     if (todo.status === "completed") {
+//       todoDiv.classList.add("completed");
+//     }
+//     todoDiv.setAttribute("key", todo.id);
+//     //Create list
+//     const newTodo = document.createElement("li");
+//     newTodo.innerText = todo.task;
+//     newTodo.classList.add("todo-item");
+//     todoDiv.appendChild(newTodo);
+//     //Create Completed Button
+//     const completedButton = document.createElement("button");
+//     completedButton.innerHTML = `<i class="fas fa-check"></i>`;
+//     completedButton.classList.add("complete-btn");
+//     todoDiv.appendChild(completedButton);
+//     //Create trash button
+//     const trashButton = document.createElement("button");
+//     trashButton.innerHTML = `<i class="fas fa-trash"></i>`;
+//     trashButton.classList.add("trash-btn");
+//     todoDiv.appendChild(trashButton);
+//     //attach final Todo
+//     todoList.appendChild(todoDiv);
+//   });
+// }
+// function filterTodo(e) {
+//   const todos = todoList.childNodes;
+//   todos.forEach(function(todo) {
+//     switch (e.target.value) {
+//       case "all":
+//         todo.style.display = "flex";
+//         break;
+//       case "completed":
+//         if (todo.classList.contains("completed")) {
+//           todo.style.display = "flex";
+//         } else {
+//           todo.style.display = "none";
+//         }
+//         break;
+//       case "incomplete":
+//         if (!todo.classList.contains("completed")) {
+//           todo.style.display = "flex";
+//         } else {
+//           todo.style.display = "none";
+//         }
+//     }
+//   });
+// }
+
+// to display congratulations pop-up if all tasks are completed
+function checkIfAllTaksCompleted() {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  let counter = 0;
+  let totalItems = todos.length;
+  todos.forEach((todo) => {
+    if (todo.status == "completed") {
+      counter++;
+    }
+  });
+  if (counter == totalItems) {
+    setAggregatedToDos();
+    document.getElementById("congratulations_box").classList.remove("hide");
+  }
+}
+
+function saveLocalTodos(todo) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+function removeLocalTodos(todo) {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  if (!isNaN(todo.getAttribute("key"))) {
+    const todoKey = Number(todo.getAttribute("key"));
+    todos = todos.filter((todo) => todo.id !== todoKey);
+  }
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function getTodos() {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+
+  todos.forEach(function (todo) {
+    //Create todo div
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("todo");
+    if (todo.status == "completed") {
+      todoDiv.classList.toggle("completed");
+    }
+    //Create list
+    const newTodo = document.createElement("li");
+    newTodo.innerText = todo.task;
+    newTodo.classList.add("todo-item");
+    todoDiv.appendChild(newTodo);
+    todoInput.value = "";
+    //input box
+    const edit = document.createElement("div");
+    edit.innerHTML =
+      ` <form class="editform">
+    <input type="text" placeholder=` +
+      `"${todo.task}"` +
+      `id="` +
+      `edit-${todo.id}` +
+      `" required />
+    <div class="editDiv" style="margin:auto;">
+    <button id="editBtn-` +
+      `${todo.id}` +
+      `" type="submit">
+      <i class="fas fa-plus-square"></i>
+    </button>
+  </div>
+  </form>`;
+    edit.classList.add("hide");
+    todoDiv.appendChild(edit);
+    //Create Completed Button
+    const completedButton = document.createElement("button");
+    completedButton.innerHTML = `<i class="fas fa-check"></i>`;
+    completedButton.classList.add("complete-btn");
+    todoDiv.appendChild(completedButton);
+    //Create edit button
+    const editButton = document.createElement("button");
+    editButton.innerHTML = `<i class="fas fa-pen"></i>`;
+    editButton.classList.add("edit-btn");
+    editButton.addEventListener("click", () => editTodo(todo, todoDiv));
+    todoDiv.appendChild(editButton);
+    //Create trash button
+    const trashButton = document.createElement("button");
+    trashButton.innerHTML = `<i class="fas fa-trash"></i>`;
+    trashButton.classList.add("trash-btn");
+    todoDiv.setAttribute("key", todo.id);
+    todoDiv.appendChild(trashButton);
+    //Create info button
+    if (!todo.infoText) todo.infoText = "Create time not found.";
+    const infoButton = document.createElement("span");
+    infoButton.innerHTML = `<i class="fas fa-info-circle"></i>`;
+    infoButton.classList.add("edit-btn");
+    todoDiv.appendChild(infoButton);
+    infoButton.addEventListener("click", () => {
+      const time = new Date(todo.createTime);
+      alert(`The todo item was created at ${time.toString().slice(0, 24)}`);
+    });
+    //attach final Todo
+    todoList.appendChild(todoDiv);
+    if (localStorage.getItem("display-theme") == "dark") {
+      todoDiv.classList.toggle('dark-mode');
+    }
+  });
+
+  setAggregatedToDos();
+}
+
+function deleteAll() {
+  [...document.getElementsByClassName("todo")].map((n) => n && n.remove());
+  localStorage.removeItem("todos");
+  document.getElementById("confirmation_box").classList.add("hide");
+  setAggregatedToDos();
+}
+
+function openmodal(color, message, timer = 3000) {
+  //pass color as either 'red' (for error), 'blue' for info and 'green' for success
+  document.getElementById("content").classList.add(color);
+  document.getElementById("modal-text").innerText = message;
+  document.getElementById("Modal").classList.add("true");
+  setTimeout(closemodal, timer);
+}
+function closemodal() {
+  document.getElementById("Modal").classList.remove("true");
+}
+
+/* Clock JS modification  */
+(function () {
+  setInterval(() => {
+    var time = new Date().toLocaleTimeString();
+    var date = new Date().toLocaleDateString();
+    var day = new Date().getDay();
+    switch (day) {
+      case 0:
+        day = "Sunday,";
+        break;
+      case 1:
+        day = "Monday,";
+        break;
+      case 2:
+        day = "Tuseday,";
+        break;
+      case 3:
+        day = "Wednesday,";
+        break;
+      case 4:
+        day = "Thursday,";
+        break;
+      case 5:
+        day = "Friday,";
+        break;
+      case 6:
+        day = "Saturday,";
+        break;
+    }
+    document.getElementById("time").innerHTML = time;
+    document.getElementById("date").innerHTML = date;
+    document.getElementById("day").innerHTML = day;
+  }, 1000);
+})();
+
+/* ################################### */
+
+function show_alert() {
+  if (localStorage.getItem("todos") === null) {
+    let html = "Please add items first";
+    console.log({html});
+    alert(html);
+  } else {
+    document.getElementById("confirmation_box").classList.remove("hide");
+  }
+}
+function goback() {
+  document.getElementById("confirmation_box").classList.add("hide");
+  document.getElementById("congratulations_box").classList.add("hide");
+}
+
+//function to toggle darkmode
+function switchToDarkMode() {
+  var elem1 = document.querySelector('.navbar');
+  var elem2 = document.querySelector('.header h1');
+  var elem3 = document.querySelector('.footer');
+  var elem4 = document.querySelectorAll('.footerelements');
+  var elem5 = document.querySelector('.Clock');
+  var elem6 = document.querySelectorAll('.todo');
+  var elem7 = document.body;
+  var elem8 = document.querySelector('.modal-content');
+  var elem9 = document.getElementById('textInput');
+
+  elem1.classList.toggle("dark-mode");
+  elem2.classList.toggle("dark-mode");
+  elem3.classList.toggle("dark-mode");
+  elem5.classList.toggle("dark-mode");
+  for(var i=0; i<elem4.length; i++){
+    elem4[i].classList.toggle("dark-mode");
+  }
+  for(var i=0; i<elem6.length; i++){
+    elem6[i].classList.toggle("dark-mode");
+  }
+  elem7.classList.toggle('body-background');
+
+  if (elem1.className == "navbar dark-mode") {
+    localStorage.setItem("display-theme", "dark");
+  } else {
+    localStorage.setItem("display-theme", "light");
+  }
+
+  elem8.classList.toggle('dark-mode');
+  elem9.classList.toggle('dark-mode');
+
+}
+//Function to check current Theme of webpage
+function checkTheme() {
+  if (localStorage.getItem("display-theme") == "dark") {
+    document.querySelector(".checkbox").checked = true;
+    switchToDarkMode();
+  }
+}
+checkTheme();
+
+btn.onclick = function () {
+  modal.style.display = "block";
+  textField.focus();
+  // checkTheme();
+};
+
+span.onclick = function () {
+  modal.style.display = "none";
+};
+addBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+function setAggregatedToDos() {
+  let todos;
+  let totalCompletedTask = 0;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+
+  const totalTask = todos.length;
+
+  todos.forEach(function (todo) {
+    if (todo.status == "completed") {
+      totalCompletedTask += 1;
+    }
+  })
+
+  const elemTotalTask = document.getElementById("state1");
+  const elemRemainingTask = document.getElementById("state2");
+  const elemCompletedTask = document.getElementById("state3");
+  elemTotalTask.textContent = totalTask;
+  elemRemainingTask.textContent = totalTask - totalCompletedTask;
+  elemCompletedTask.textContent = totalCompletedTask;
+}
+
+        let scrollBtn = document.getElementById("scrollTop");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollBtn.style.display = "block";
+            } else {
+                scrollBtn.style.display = "none";
+            }
+        }
+
+        const scrollWindow = function () {
+            if (window.scrollY != 0) {
+                setTimeout(function () {
+                    window.scrollTo(0, window.scrollY - 50);
+                    window.scroll({ top: 0, behavior: "smooth" })
+                    scrollWindow();
+                }, 10);
+            }
+        }
+    </script>
+
+</body>
+
+
+</html>
